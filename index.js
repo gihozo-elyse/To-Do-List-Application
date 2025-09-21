@@ -87,11 +87,35 @@ function renderTasks() {
 
     
       const actions = document.createElement("div");
-      actions.className = "flex gap-2 ml-2";
-      actions.innerHTML = `
-        <button class="text-purple-600">✔</button>
-        <button class="text-red-500">✖</button>
-      `;
+actions.className = "flex gap-2 ml-2";
+
+
+const completeBtn = document.createElement("button");
+completeBtn.textContent = "Complete";
+completeBtn.className =
+  "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded";
+
+const deleteBtn = document.createElement("button");
+deleteBtn.textContent = "Delete";
+deleteBtn.className =
+  "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded";
+
+
+completeBtn.addEventListener("click", () => {
+  task.completed = !task.completed;
+  saveTasks();
+  renderTasks();
+});
+
+deleteBtn.addEventListener("click", () => {
+  tasks.splice(index, 1);
+  saveTasks();
+  renderTasks();
+});
+
+
+actions.appendChild(completeBtn);
+actions.appendChild(deleteBtn);
 
       
       actions.children[0].addEventListener("click", () => {
@@ -114,3 +138,27 @@ function renderTasks() {
       taskList.appendChild(li);
     });
 }
+
+addTaskBtn.addEventListener("click", () => {
+  const text = taskInput.value.trim();
+  if (text === "") return;
+
+  tasks.push({
+    text,
+    completed: false,
+    category: categoryInput.value,
+    priority: priorityInput.value,
+  });
+
+  saveTasks();
+  renderTasks();
+  taskInput.value = "";
+});
+
+
+searchInput.addEventListener("input", renderTasks);
+filterCategory.addEventListener("change", renderTasks);
+
+
+renderTasks();
+
