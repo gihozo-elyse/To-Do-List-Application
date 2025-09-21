@@ -8,6 +8,8 @@ const priorityInput = document.getElementById("priorityInput");
 const filterCategory = document.getElementById("filterCategory");
 
 let darkMode = JSON.parse(localStorage.getItem("darkMode")) || false;
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
 
 
 
@@ -31,7 +33,6 @@ function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-
 function renderTasks() {
   const searchText = searchInput.value.toLowerCase();
   const selectedCategory = filterCategory.value;
@@ -49,29 +50,16 @@ function renderTasks() {
       li.className =
         "flex justify-between items-center bg-gray-100 dark:bg-gray-700 p-3 rounded-lg";
 
-      
+      // ✅ Left side: text + labels
+      const left = document.createElement("div");
+      left.className = "flex items-center gap-3";
+
       const span = document.createElement("span");
       span.textContent = task.text;
       span.className =
-        "flex-grow cursor-pointer " +
+        "font-medium " +
         (task.completed ? "line-through text-gray-500" : "text-gray-900 dark:text-gray-100");
 
-      span.addEventListener("click", () => {
-        const input = document.createElement("input");
-        input.type = "text";
-        input.value = task.text;
-        input.className = "flex-grow px-2 py-1 rounded";
-        li.replaceChild(input, span);
-
-        input.addEventListener("blur", () => {
-          task.text = input.value.trim();
-          saveTasks();
-          renderTasks();
-        });
-        input.focus();
-      });
-
-      
       const labels = document.createElement("div");
       labels.className = "flex gap-2 text-xs";
       labels.innerHTML = `
@@ -85,59 +73,46 @@ function renderTasks() {
         }">${task.priority}</span>
       `;
 
-    
-      const actions = document.createElement("div");
-actions.className = "flex gap-2 ml-2";
-
-
-const completeBtn = document.createElement("button");
-completeBtn.textContent = "Complete";
-completeBtn.className =
-  "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded";
-
-const deleteBtn = document.createElement("button");
-deleteBtn.textContent = "Delete";
-deleteBtn.className =
-  "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded";
-
-
-completeBtn.addEventListener("click", () => {
-  task.completed = !task.completed;
-  saveTasks();
-  renderTasks();
-});
-
-deleteBtn.addEventListener("click", () => {
-  tasks.splice(index, 1);
-  saveTasks();
-  renderTasks();
-});
-
-
-actions.appendChild(completeBtn);
-actions.appendChild(deleteBtn);
+      left.appendChild(span);
+      left.appendChild(labels);
 
       
-      actions.children[0].addEventListener("click", () => {
+      const actions = document.createElement("div");
+      actions.className = "flex gap-2";
+
+      const completeBtn = document.createElement("button");
+      completeBtn.textContent = task.completed ? "Undo" : "Complete";
+      completeBtn.className =
+        "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded";
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.className =
+        "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded";
+
+      completeBtn.addEventListener("click", () => {
         task.completed = !task.completed;
         saveTasks();
         renderTasks();
       });
 
-
-      actions.children[1].addEventListener("click", () => {
+      deleteBtn.addEventListener("click", () => {
         tasks.splice(index, 1);
         saveTasks();
         renderTasks();
       });
 
-      li.appendChild(span);
-      li.appendChild(labels);
+      actions.appendChild(completeBtn);
+      actions.appendChild(deleteBtn);
+
+      
+      li.appendChild(left);
       li.appendChild(actions);
 
       taskList.appendChild(li);
     });
 }
+
 
 addTaskBtn.addEventListener("click", () => {
   const text = taskInput.value.trim();
