@@ -5,21 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My To-Do List</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  
   </head>
-<body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center">
-  <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 w-full max-w-lg">
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex  justify-center p-4  lg:items-center">
+  <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 w-full max-w-lg md:max-w-2xl">
 
-    <div class="flex justify-between items-center mb-4">
-  <div class="flex items-center gap-3">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-3 text-center sm:text-left">
+  <div class="flex flex-col sm:flex-row sm:items-center gap-3 ">
     
-    <img src="elyse.jpg" alt="Profile" class="w-40 h-40 rounded-full border border-gray-300 shadow">
+    <img src="elyse.jpg" alt="Profile" class="w-20 h-20  sm:w-40 sm:h-40 rounded-full border border-gray-300 shadow">
     
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Task Manager Pro</h1>
+    <h1 class="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100 leading-tight break-words">Task Manager Pro</h1>
   </div>
   
-  <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">🌙</button>
+  <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-lg ml-auto">🌙</button>
 </div>
-<div class="flex mb-4">
+
+<div class=" flex flex-col sm:flex-row mb-4">
       <input
         id="taskInput"
         type="text"
@@ -31,19 +33,19 @@
         class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600"
       >Add</button>
       </div>
-      <div class="flex gap-8 mb-4">
-      <select id="categoryInput" class="px-2 border-t border-b border-gray-300">
+      <div class="flex flex-col sm:flex-row gap-8 mb-4 px-2 py-2 border rounded-lg">
+      <select id="categoryInput" class="px-2 border-t border-b border-gray-300 px-2 border rounded-lg">
         <option value="Work">Work</option>
         <option value="Personal">Personal</option>
         <option value="School">School</option>
       </select>
-      <select id="priorityInput" class="px-2 border-t border-b border-r border-gray-300">
+      <select id="priorityInput" class="px-2 border-t border-b border-r border-gray-300 px-2 border rounded-lg">
         <option value="Low">Low</option>
         <option value="Medium" selected>Medium</option>
         <option value="High">High</option>
       </select>
       </div>
-       <div class="flex gap-2 mb-4">
+       <div class="flex flex-col sm:flex-row  gap-2 mb-4 px-2 py-2 border rounded-lg">
       <input  id="searchInput"type="text"placeholder="Search tasks..."class="flex-grow px-3 py-2 border rounded-lg"/>
       <select id="filterCategory" class="px-2 border rounded-lg">
         <option value="All">All</option>
