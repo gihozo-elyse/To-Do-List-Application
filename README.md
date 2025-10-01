@@ -14,7 +14,7 @@ It supports task creation, search, category filtering, priority levels, and **da
 
 ---
 
-##  Tech Stack
+##  Tech i used
 - **HTML5** – Structure of the app.  
 - **Tailwind CSS** – Styling and responsive layout.  
 - **JavaScript** – Task logic, filtering, and dark mode.  
@@ -33,3 +33,9 @@ project-folder/
 ![grid](./tsk1.png)
 ![grid](./tsk.png)
 ![grid](./task3.png)
+
+## “Here’s how to install or set up this project.”
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/gihozo-elyse/To-Do-List-Application

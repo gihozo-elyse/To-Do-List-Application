@@ -13,6 +13,8 @@ let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 
 
+
+
 function applyDarkMode() {
   if (darkMode) {
     document.documentElement.classList.add("dark");
